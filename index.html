@@ -212,12 +212,14 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
+            position: relative;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
+            z-index: 1001;
         }
 
         .logo-img {
@@ -281,6 +283,14 @@
             border: none;
             cursor: pointer;
             color: var(--primary-color);
+            transition: var(--transition);
+            padding: 10px;
+            border-radius: var(--border-radius);
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: rgba(0, 84, 97, 0.1);
         }
 
         /* Floating Social Media FABs */
@@ -596,7 +606,7 @@
 
         .service-image-large img {
             width: 100%;
-            height: 100;
+            height: 100%;
             display: block;
             transition: var(--transition);
         }
@@ -637,7 +647,7 @@
         .gallery-title {
             font-size: 1.5rem;
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 0px;
             text-align: center;
         }
 
@@ -674,35 +684,95 @@
             transform: scale(1.1);
         }
 
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 84, 97, 0.9), transparent);
-            color: white;
-            padding: 10px;
-            transform: translateY(100%);
-            transition: var(--transition);
-        }
-
+       .gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 84, 97, 0.9), transparent);
+    color: white;
+    padding: 20px 15px;
+    transform: translateY(100%);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Add space between title and description */
+}
         .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
+    transform: translateY(0);
+}
 
         .gallery-overlay span {
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: block;
-            margin-bottom: 5px;
-        }
+    font-size: 1rem;
+    font-weight: 600; /* Make title bolder for better hierarchy */
+    display: block;
+    margin-bottom: 5px; /* Reduced margin since we're using gap */
+    line-height: 1.2;
+}
 
         .gallery-description {
-            font-size: 0.8rem;
-            opacity: 0.9;
-            font-style: italic;
-        }
+    font-size: 0.85rem;
+    opacity: 0.9;
+    font-style: italic;
+    line-height: 1.3;
+    display: -webkit-box;
+   
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .gallery-overlay {
+        padding: 15px 12px;
+    }
+    
+    .gallery-overlay span {
+        font-size: 0.95rem;
+    }
+    
+    .gallery-description {
+        font-size: 0.8rem;
+       
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-overlay {
+        padding: 12px 10px;
+        gap: 6px;
+    }
+    
+    .gallery-overlay span {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    
+    .gallery-description {
+        font-size: 0.75rem;
+       
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-overlay {
+        padding: 10px 8px;
+        gap: 4px;
+    }
+    
+    .gallery-overlay span {
+        font-size: 0.85rem;
+    }
+    
+    .gallery-description {
+        font-size: 0.7rem;
+      
+        line-height: 1.1;
+    }
+}
         /* Why Choose Us */
         .why-us {
             background-color: var(--light-color);
@@ -1028,7 +1098,6 @@
             
             .social-fabs {
                 right: 10px;
-                
             }
         }
 
@@ -1068,15 +1137,17 @@
             }
             
            .social-fab {
-            right: 10px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-           } 
-            
+                right: 10px;
+                width: 45px;
+                height: 45px;
+            } 
         }
 
         @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
             .nav-links {
                 position: fixed;
                 top: 80px;
@@ -1089,6 +1160,7 @@
                 box-shadow: 0 10px 10px rgba(0, 84, 97, 0.1);
                 transform: translateY(-100%);
                 opacity: 0;
+                visibility: hidden;
                 transition: var(--transition);
                 z-index: 999;
             }
@@ -1096,10 +1168,7 @@
             .nav-links.active {
                 transform: translateY(0);
                 opacity: 1;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
+                visibility: visible;
             }
             
             .hero-content h1 {
@@ -1140,12 +1209,17 @@
             .gallery-item img {
                 height: 300px;
             }
+            
             .social-fabs {
-                display:flex;
+                right: 10px;
+                padding: 10px 8px;
             }
             
-            
-           
+            .social-fab {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1179,14 +1253,19 @@
             }
             
             .gallery-item img {
-                height: 500px;
+                height: 250px;
             }
-
-
+            
             .social-fabs {
-                display:flex;
+                right: 5px;
+                padding: 8px 5px;
             }
-                
+            
+            .social-fab {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
         }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1236,7 +1315,7 @@
                 </div>
             </div>
             
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
             </button>
             
@@ -1389,6 +1468,7 @@
                         <img src="images/1 (3).jpeg" alt="Lease Signing">
                         <div class="gallery-overlay">
                             <span>Lease Signing</span>
+                           
                             <div class="gallery-description">Professional lease agreement documentation process</div>
                         </div>
                     </div>
@@ -1445,7 +1525,7 @@
                         <img src="images/1 (11).jpeg" alt="Tenant Relations">
                         <div class="gallery-overlay">
                             <span>Tenant Relations</span>
-                            <div class="gallery-description">Professional communication and relationship management</div>
+                            <div class="gallery-description"><h7>Professional communication and relationship management,<h7/></div>
                         </div>
                     </div>
                 </div>
@@ -1550,7 +1630,7 @@
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1 (22).jpeg" alt="Financial Statements">
+                        <img src="images/financial statement.jpeg" alt="Financial Statements">
                         <div class="gallery-overlay">
                             <span>Financial Statements</span>
                             <div class="gallery-description">Comprehensive financial documentation for property owners</div>
@@ -1595,7 +1675,7 @@
                 <div class="service-gallery" id="maintenance-gallery">
                     <!-- 10 images for Property Maintenance with descriptions -->
                     <div class="gallery-item">
-                        <img src="images/1 (24).jpeg" alt="Property Inspection">
+                        <img src="images/property inspection.jpeg" alt="Property Inspection">
                         <div class="gallery-overlay">
                             <span>Property Inspection</span>
                             <div class="gallery-description">Regular property assessments to identify maintenance needs</div>
@@ -1609,14 +1689,14 @@
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1 (26).jpeg" alt="Plumbing Services">
+                        <img src="images/plumbing services.jpeg" alt="Plumbing Services">
                         <div class="gallery-overlay">
                             <span>Plumbing Services</span>
                             <div class="gallery-description">Expert plumbing repairs and maintenance services</div>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1 (27).jpeg" alt="Electrical Work">
+                        <img src="images/electric work.jpeg" alt="Electrical Work">
                         <div class="gallery-overlay">
                             <span>Electrical Work</span>
                             <div class="gallery-description">Professional electrical system maintenance and repairs</div>
@@ -1630,17 +1710,17 @@
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1 (29).jpeg" alt="Carpentry Work">
+                        <img src="images/carpentry work.jpeg" alt="Carpentry Work">
                         <div class="gallery-overlay">
                             <span>Carpentry Work</span>
                             <div class="gallery-description">Quality carpentry repairs and custom woodwork</div>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1 (30).jpeg" alt="Painting Services">
+                        <img src="images/painting.jpeg" alt="Painting Services">
                         <div class="gallery-overlay">
                             <span>Painting Services</span>
-                            <div class="gallery-description">Professional interior and exterior painting services</div>
+                            <div class="gallery-description">Professional interior and house renovation</div>
                         </div>
                     </div>
                     <div class="gallery-item">
@@ -1651,7 +1731,7 @@
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1 (32).jpeg" alt="Cleaning Services">
+                        <img src="images/clean.jpeg" alt="Cleaning Services">
                         <div class="gallery-overlay">
                             <span>Cleaning Services</span>
                             <div class="gallery-description">Regular professional cleaning for property upkeep</div>
@@ -1703,14 +1783,14 @@
                 <div class="service-gallery" id="residential-gallery">
                     <!-- 10 images for Residential & Commercial Management with descriptions -->
                     <div class="gallery-item">
-                        <img src="images/apart.jpeg" alt="Apartment Complex">
+                        <img src="images/apartment.jpeg" alt="Apartment Complex">
                         <div class="gallery-overlay">
                             <span>Apartment Complex</span>
                             <div class="gallery-description">Professional management of multi-unit residential buildings</div>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1 (36).jpeg" alt="Single Family Homes">
+                        <img src="images/ssingle family homes.jpeg" alt="Single Family Homes">
                         <div class="gallery-overlay">
                             <span>Single Family Homes</span>
                             <div class="gallery-description">Dedicated management for individual residential properties</div>
@@ -1745,7 +1825,7 @@
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1 (41).jpeg" alt="Industrial Property">
+                        <img src="images/industrial property.jpeg" alt="Industrial Property">
                         <div class="gallery-overlay">
                             <span>Industrial Property</span>
                             <div class="gallery-description">Specialized management for factories and warehouses</div>
@@ -1759,7 +1839,7 @@
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1 (43).jpeg" alt="Warehouse Facilities">
+                        <img src="images/warehousefacility.jpeg" alt="Warehouse Facilities">
                         <div class="gallery-overlay">
                             <span>Warehouse Facilities</span>
                             <div class="gallery-description">Management of storage and distribution facilities</div>
@@ -1818,7 +1898,7 @@
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/plan.jpeg" alt="House Plan Design">
+                        <img src="images/hoseplan.jpeg" alt="House Plan Design">
                         <div class="gallery-overlay">
                             <span>House Plan Design</span>
                             <div class="gallery-description">Custom architectural design services for residential properties</div>
@@ -1832,7 +1912,7 @@
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/search.jpeg" alt="Land Search">
+                        <img src="images/land search.jpeg" alt="Land Search">
                         <div class="gallery-overlay">
                             <span>Land Search</span>
                             <div class="gallery-description">Comprehensive property title verification services</div>
@@ -1849,7 +1929,6 @@
                         <img src="images/clean.jpeg" alt="Cleaning Services">
                         <div class="gallery-overlay">
                             <span>Cleaning Services</span>
-                            
                             <div class="gallery-description">Professional cleaning for all properties</div>
                         </div>
                     </div>
@@ -1861,7 +1940,7 @@
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/hose plan.jpeg" alt="Property Valuation">
+                        <img src="images/propertyvaluation.jpeg" alt="Property Valuation">
                         <div class="gallery-overlay">
                             <span>Property Valuation</span>
                             <div class="gallery-description">Accurate property value assessment services</div>
@@ -2148,16 +2227,16 @@
         // Gallery data for each service with descriptions
         const serviceGalleries = {
             'tenant': [
-                { src: 'images/screen.jpeg', title: 'Tenant Screening', description: 'Comprehensive background checks for reliable tenants' },
-                { src: 'images/1 (12).jpeg', title: 'Lease Signing', description: 'Professional lease agreement documentation process' },
+                { src: 'images/screen.jpeg', title: 'Tenant Screening', description: 'Background checks for reliable tenants' },
+                { src: 'images/1 (12).jpeg', title: 'Lease Signing', description: 'lease agreement documentation process' },
                 { src: 'images/1 (13).jpeg', title: 'Tenant Interview', description: 'Personal interviews to assess tenant suitability' },
                 { src: 'images/1 (14).jpeg', title: 'Property Viewing', description: 'Organized property tours for prospective tenants' },
-                { src: 'images/1 (15).jpeg', title: 'Background Checks', description: 'Thorough verification of tenant history and references' },
+                { src: 'images/1 (15).jpeg', title: 'Background Checks', description: 'Verification of tenant history and references' },
                 { src: 'images/1 (16).jpeg', title: 'Document Verification', description: 'Meticulous checking of identification  documents' },
                 { src: 'images/1 (17).jpeg', title: 'Reference Checking', description: 'Contacting previous landlords for tenant references' },
                 { src: 'images/1 (18).jpeg', title: 'Tenant Database', description: 'Organized digital records of all tenant information' },
-                { src: 'images/1 (19).jpeg', title: 'Move-in Inspection', description: 'Detailed property condition documentation at move-in' },
-                { src: 'images/1 (20).jpeg', title: 'Tenant Relations', description: 'Professional communication and relationship management' }
+                { src: 'images/1 (19).jpeg', title: 'Move-in Inspection', description: 'Property condition documentation at move-in' },
+                { src: 'images/1 (20).jpeg', title: 'Tenant Relations', description: 'Communication and relationship management' }
             ],
             'rent': [
                 { src: 'images/1 (1).jpeg', title: 'Digital Payments', description: 'Secure online payment processing for tenant convenience' },
@@ -2169,41 +2248,41 @@
                 { src: 'images/1 (7).jpeg', title: 'Payment Analytics', description: 'Analysis of payment patterns and trends' },
                 { src: 'images/1 (8).jpeg', title: 'Automated Reminders', description: 'Systematic reminders for upcoming rent payments' },
                 { src: 'images/1 (9).jpeg', title: 'Collection Strategy', description: 'Effective approaches for timely rent collection' },
-                { src: 'images/1 (10).jpeg', title: 'Financial Statements', description: 'Financial documentation for property owners' }
+                { src: 'images/financial statement.jpeg', title: 'Financial Statements', description: 'Financial documentation for property owners' }
             ],
             'maintenance': [
-                { src: 'images/1 (21).jpeg', title: 'Property Inspection', description: 'Regular property assessments to identify maintenance needs' },
+                { src: 'images/property inspection.jpeg', title: 'Property Inspection', description: 'Regular property assessments to identify maintenance needs' },
                 { src: 'images/1 (22).jpeg', title: 'Repair Coordination', description: 'Efficient organization of repair work with trusted contractors' },
-                { src: 'images/1 (23).jpeg', title: 'Plumbing Services', description: 'Expert plumbing repairs and maintenance services' },
-                { src: 'images/1 (24).jpeg', title: 'Electrical Work', description: 'Professional electrical system maintenance and repairs' },
+                { src: 'images/plumbing services.jpeg', title: 'Plumbing Services', description: 'Expert plumbing repairs and maintenance services' },
+                { src: 'images/electric work.jpeg', title: 'Electrical Work', description: 'Professional electrical system maintenance and repairs' },
                 { src: 'images/1 (25).jpeg', title: 'HVAC Maintenance', description: 'Heating and cooling system servicing for functionality' },
-                { src: 'images/1 (26).jpeg', title: 'Carpentry Work', description: 'Quality carpentry repairs and custom woodwork' },
-                { src: 'images/paint.jpeg', title: 'Painting Services', description: 'Professional interior and house renovatio' },
+                { src: 'images/carpentry work.jpeg', title: 'Carpentry Work', description: 'Quality carpentry repairs and custom woodwork' },
+                { src: 'images/painting.jpeg', title: 'Painting Services', description: 'Professional interior and house renovatio' },
                 { src: 'images/1 (28).jpeg', title: 'Landscaping', description: 'Beautiful outdoor space maintenance and improvement' },
                 { src: 'images/clean.jpeg', title: 'Cleaning Services', description: 'Regular professional cleaning for property upkeep' },
                 { src: 'images/1 (30).jpeg', title: 'Emergency Repairs', description: '24/7 emergency response for urgent maintenance issues' }
             ],
             'residential': [
-                { src: 'images/apart.jpeg', title: 'Apartment Complex', description: 'Professional management of multi-unit residential buildings' },
-                { src: 'images/1 (32).jpeg', title: 'Single Family Homes', description: 'Dedicated management for individual residential properties' },
+                { src: 'images/apartment.jpeg', title: 'Apartment Complex', description: 'Professional management of multi-unit residential buildings' },
+                { src: 'images/ssingle family homes.jpeg', title: 'Single Family Homes', description: 'Dedicated management for individual residential properties' },
                 { src: 'images/OFF.jpg', title: 'Office Buildings', description: 'Specialized management for corporate office spaces' },
                 { src: 'images/1 (34).jpeg', title: 'Air Bnb', description: 'luxurious air bnb' },
                 { src: 'images/1 (35).jpeg', title: 'Commercial Complex', description: 'Management of mixed commercial properties' },
                 { src: 'images/1 (36).jpeg', title: 'Mixed-Use Development', description: 'Management of residential and commercial spaces' },
-                { src: 'images/1 (37).jpeg', title: 'Industrial Property', description: 'Specialized management for factories and warehouses' },
+                { src: 'images/industrial property', title: 'Industrial Property', description: 'Specialized management for factories and warehouses' },
                 { src: 'images/1 (38).jpeg', title: 'Vacation Rentals', description: 'Short-term rental management for holiday properties' },
-                { src: 'images/1 (39).jpeg', title: 'Warehouse Facilities', description: 'Management of storage and distribution facilities' },
+                { src: 'images/warefacilities.jpeg', title: 'Warehouse Facilities', description: 'Management of storage and distribution facilities' },
                 { src: 'images/1 (26).jpeg', title: 'Gated Communities', description: 'Comprehensive management of residential communities' }
             ],
             'additional': [
                 { src: 'images/real.jpeg', title: 'Real Estate Consultancy', description: 'Expert advice on property investment strategies' },
-                { src: 'images/plan.jpeg', title: 'House Plan Design', description: 'Custom architectural design for residential properties' },
+                { src: 'images/hoseplan.jpeg', title: 'House Plan Design', description: 'Custom architectural design for residential properties' },
                 { src: 'images/1 (43).jpeg', title: 'Surveying Services', description: 'Professional land measurement and boundary marking' },
-                { src: 'images/search.jpeg', title: 'Land Search', description: 'Comprehensive property title verification services' },
+                { src: 'images/land search.jpeg', title: 'Land Search', description: 'Comprehensive property title verification services' },
                 { src: 'images/titl1e.JPG', title: 'Title Transfers', description: 'Assistance with property ownership transfer processes' },
                 { src: 'images/clean.jpeg', title: 'Cleaning Services', description: 'Professional cleaning  for all properties' },
                 { src: 'images/fumi.jpeg', title: 'Fumigation', description: 'Professional pest control and fumigation services' },
-                { src: 'images/1 (48).jpeg', title: 'Property Valuation', description: 'Accurate property value assessment services' },
+                { src: 'images/propertyvaluation.jpeg', title: 'Property Valuation', description: 'Accurate property value assessment services' },
                 { src: 'images/1 (49).jpeg', title: 'Market Research', description: 'Comprehensive real estate market analysis and reports' },
                 { src: 'images/1 (50).jpeg', title: 'Investment Analysis', description: 'Detailed analysis of property investment opportunities' }
             ]
@@ -2242,20 +2321,22 @@
             prevServiceBtn.addEventListener('click', goToPrevService);
             nextServiceBtn.addEventListener('click', goToNextService);
             
-            // Mobile menu toggle
-            mobileMenuBtn.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
-            });
+            // Mobile menu toggle function
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
             
             // Close mobile menu when clicking a link
             document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                });
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navLinks.contains(event.target);
+                const isClickOnMenuBtn = mobileMenuBtn.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnMenuBtn && navLinks.classList.contains('active')) {
+                    closeMobileMenu();
+                }
             });
             
             // Video loading handler
@@ -2317,6 +2398,29 @@
             checkMobileAndHideFABs();
             window.addEventListener('resize', checkMobileAndHideFABs);
         });
+
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const isActive = navLinks.classList.toggle('active');
+            
+            // Update button icon
+            if (isActive) {
+                mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                mobileMenuBtn.style.color = 'var(--secondary-color)';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            } else {
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                mobileMenuBtn.style.color = 'var(--primary-color)';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+        }
+
+        function closeMobileMenu() {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileMenuBtn.style.color = 'var(--primary-color)';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
 
         // Load service video
         function loadService(serviceIndex) {
@@ -2511,6 +2615,9 @@
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
+                        // Close mobile menu if open
+                        closeMobileMenu();
+                        
                         window.scrollTo({
                             top: targetElement.offsetTop - 80,
                             behavior: 'smooth'
@@ -2599,14 +2706,15 @@
                     }
                 } else if (e.key === 'Escape') {
                     closeModalFunction();
+                    closeMobileMenu();
                 }
             });
         }
 
         // Check if mobile and hide FABs
         function checkMobileAndHideFABs() {
-            if (window.innerWidth <= 992) {
-                socialFabs.style.display = 'flex';
+            if (window.innerWidth <= 768) {
+                socialFabs.style.display = 'none';
             } else {
                 socialFabs.style.display = 'flex';
             }
