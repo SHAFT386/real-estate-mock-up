@@ -286,8 +286,8 @@
         /* Floating Social Media FABs */
         .social-fabs {
             position: fixed;
-            left: 20px;
-            top: 50%;
+            right: 20px;
+            top: 70%;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
@@ -596,7 +596,7 @@
 
         .service-image-large img {
             width: 100%;
-            height: auto;
+            height: 100;
             display: block;
             transition: var(--transition);
         }
@@ -664,7 +664,7 @@
 
         .gallery-item img {
             width: 100%;
-            height: 200px;
+            height: 300px;
             object-fit: cover;
             display: block;
             transition: var(--transition);
@@ -1027,7 +1027,8 @@
             }
             
             .social-fabs {
-                left: 10px;
+                right: 10px;
+                
             }
         }
 
@@ -1066,9 +1067,13 @@
                 direction: ltr;
             }
             
-            .social-fabs {
-                display: none;
-            }
+           .social-fab {
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+           } 
+            
         }
 
         @media (max-width: 768px) {
@@ -1133,12 +1138,14 @@
             }
             
             .gallery-item img {
-                height: 150px;
+                height: 300px;
+            }
+            .social-fabs {
+                display:flex;
             }
             
-            .social-fabs {
-                display: none;
-            }
+            
+           
         }
 
         @media (max-width: 576px) {
@@ -1172,8 +1179,14 @@
             }
             
             .gallery-item img {
-                height: 120px;
+                height: 500px;
             }
+
+
+            .social-fabs {
+                display:flex;
+            }
+                
         }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2593,7 +2606,7 @@
         // Check if mobile and hide FABs
         function checkMobileAndHideFABs() {
             if (window.innerWidth <= 992) {
-                socialFabs.style.display = 'none';
+                socialFabs.style.display = 'flex';
             } else {
                 socialFabs.style.display = 'flex';
             }
